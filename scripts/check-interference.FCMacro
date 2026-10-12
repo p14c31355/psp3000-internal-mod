@@ -1,0 +1,29 @@
+import os
+import Part
+
+
+def load_solid(path):
+    shape = Part.read(path)
+    if shape.isNull() or not shape.isValid() or not shape.Solids:
+        raise ValueError("STEP must contain valid solids: " + path)
+    return shape
+
+
+report_path = os.environ["INTERFERENCE_REPORT"]
+try:
+    board = load_solid(os.environ["BOARD_STEP"])
+    enclosure = load_solid(os.environ["ENCLOSURE_STEP"])
+    overlap_mm3 = board.common(enclosure).Volume
+    clearance_mm = board.distToShape(enclosure)[0]
+    result = "FAIL" if overlap_mm3 > 0.001 else "PASS"
+    lines = [
+        "Board: " + os.environ["BOARD_STEP"],
+        "Enclosure solid: " + os.environ["ENCLOSURE_STEP"],
+        "Intersection volume (mm^3): {:.6f}".format(overlap_mm3),
+        "Minimum solid distance (mm): {:.6f}".format(clearance_mm),
+        "RESULT: " + result,
+    ]
+except Exception as exc:
+    lines = ["ERROR: " + str(exc), "RESULT: FAIL"]
+with open(report_path, "w") as report:
+    report.write("\n".join(lines) + "\n")
