@@ -3004,7 +3004,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "1029ab29-c08c-5ba3-9d38-8148f117c557")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 119.38 86.36 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "2d0fd743-6473-52e8-83d6-f264ffe9d724")
@@ -3019,7 +3019,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "0e52b3f3-510b-52df-aa35-2c081cd8f801")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 119.38 93.98 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "42f0d7a3-b1b9-5f80-8e19-c69e6464f05d")
@@ -3034,7 +3034,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "df002413-125b-5d2a-8901-2c5244dd15cd")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 119.38 101.60 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "c16e2cd9-5e8a-5d45-a24d-941f35a3db71")
@@ -3049,7 +3049,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "b2a4b227-def4-5977-bac2-1f6035cb4ed6")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 119.38 109.22 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "83c494dc-debe-58fb-82da-aaf5e71e114e")
@@ -3159,7 +3159,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "3d4061aa-da26-56fc-8702-a6a7f6321a4d")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 187.96 76.20 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "5ef9ebbb-bc3b-5aae-b588-7c2dceb466be")
@@ -3174,7 +3174,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "9d185109-6101-5368-814e-45610fb1b4bb")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 187.96 83.82 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "381b8bde-1dd1-50d3-9f50-fdb2b5814c99")
@@ -3189,7 +3189,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "f90545d7-ceba-5a60-b124-3812e23e6c18")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 187.96 91.44 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "f1bd4c03-93e7-5b1e-8fb9-6276ffb16df0")
@@ -3204,7 +3204,7 @@
 		(effects (font (size 1.27 1.27)))
 		(uuid "7b169665-15cd-50b8-98cc-5efd62b2f452")
 	)
-	(label "GNDRX"
+	(label "GND"
 		(at 187.96 99.06 0)
 		(effects (font (size 1.27 1.27)))
 		(uuid "420057bd-51b9-5ae6-8ba6-e244196bd9ec")

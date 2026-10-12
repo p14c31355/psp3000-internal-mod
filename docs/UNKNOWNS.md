@@ -77,3 +77,17 @@ precision, and why it matters. Blocked work is listed per entry.
 - How: donor, ohmmeter.
 - Blocked: amp part choice only.
 - Status: OPEN.
+
+## U9: J1 (Amphenol F32Q-31P) 3D model availability
+- What: No vendor STEP model ships with KiCad 10 for the Amphenol F32Q
+  0.5 mm 31-pin FPC connector (only Hirose FH12 30S/32S and FH26 31S/0.6 mm
+  exist in the standard 3D library).
+- Why it matters: STEP export of the SVDI breakout board currently contains
+  the board outline and J2 only; J1 is missing from the mechanical check.
+- How to resolve: download the Amphenol F32Q STEP from amphenol-icc.com
+  (drawing f32q-f32t.pdf links the 3D model), place it under
+  pcb/svdi-breakout/3dmodels/, and reference it with an absolute-ish path
+  or ${KIPRJMOD}.
+- Blocked: mechanical interference check of the breakout board (low risk:
+  the board is a bench tool, not shell-mounted).
+- Status: OPEN (documented gap; does not gate the capture-board design).

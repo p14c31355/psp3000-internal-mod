@@ -145,9 +145,9 @@ def main():
         (6, "VGH"), (7, "VL"), (8, "VH"), (9, "GND"), (10, "VS"),
         (11, "VS"), (12, "GND"), (13, "VCC"), (14, "SDO"), (15, "SDI"),
         (16, "SCLK"), (17, "SCS"), (18, "REV"), (19, "RESETB"),
-        (20, "GNDRX"), (21, "DATA2P"), (22, "DATA2N"), (23, "GNDRX"),
-        (24, "CLKP"), (25, "CLKN"), (26, "GNDRX"), (27, "DATA1P"),
-        (28, "DATA1N"), (29, "GNDRX"), (30, "VCCRX"), (31, "COM"),
+        (20, "GND"), (21, "DATA2P"), (22, "DATA2N"), (23, "GND"),
+        (24, "CLKP"), (25, "CLKN"), (26, "GND"), (27, "DATA1P"),
+        (28, "DATA1N"), (29, "GND"), (30, "VCCRX"), (31, "COM"),
     ]
     wires = []
     labels = []
