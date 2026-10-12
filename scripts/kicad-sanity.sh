@@ -11,7 +11,13 @@ echo "== Python =="
 echo "== KiCad Python =="
 "$ROOT/.venv/bin/python" -c "import kipy; print(\"kicad-python / kipy OK\")"
 echo "== FreeCAD =="
-if command -v freecadcmd >/dev/null; then freecadcmd --version; elif command -v freecad >/dev/null; then freecad --version; else echo "FreeCAD not installed (optional for now)"; fi
+if command -v freecadcmd >/dev/null; then
+  freecadcmd --get-config ExeVersion
+elif command -v freecad >/dev/null; then
+  freecad --get-config ExeVersion
+else
+  echo "FreeCAD not installed"
+fi
 echo "== Repository =="
 git status --short
 echo "KiCad/Hermes environment looks sane."
