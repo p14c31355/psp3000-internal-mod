@@ -1,0 +1,20 @@
+Radxa ZERO 3W v1.11 height profile (z-slices of official STEP, tessellate 0.15mm)
+Board plane Z=0, X 0..65, Y 0..30 (DXF coords). Generated 2026-10-13.
+
+z=0.60: X   0.59.. 64.22 Y  -1.50.. 29.22   (parts nearly full board; Y<0 = USB-C/microHDMI overhang beyond board edge)
+z=1.00: X   0.59.. 61.27 Y  -1.50.. 29.22
+z=1.50: X   7.05.. 58.50 Y  -1.50.. 29.22
+z=2.00: X   7.05.. 58.50 Y  -1.50.. 29.22
+z=2.50: X   7.05.. 58.50 Y  -1.50.. 29.22
+z=3.00: X   8.00.. 57.82 Y  -1.50.. 28.27
+z=3.50: X   8.00.. 56.91 Y  25.08.. 28.27   (only the 40-pin GPIO header remains above 3.5)
+z=4.00..8.00: same header footprint only
+z=8.60: none
+
+Derived facts (class DERIVED, from official STEP radxa_zero_3w_3d.stp):
+- Absolute max height WITH 40-pin header populated: 8.5 mm (header span X 8.0..56.9, Y 25.1..28.3).
+- Max height with header unpopulated: between 3.0 and 3.5 mm; conservative budget 3.5 mm.
+- Below-board stack: max -4.5 mm at the USB-C / micro-HDMI edge region (Y<0 side);
+  small parts elsewhere reach about -1.95 mm.
+- At z>1.0 the right strip X>61.3 and left strip X<7.1 are clear (header-free zone
+  boundary moves at 1.5 mm).

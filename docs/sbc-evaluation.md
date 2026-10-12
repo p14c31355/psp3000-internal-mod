@@ -18,8 +18,9 @@ file records candidates and their hard data only.
 | GPIO | 40-pin: UART/SPI/I2C/I2S/PWM | VRS | Radxa docs |
 | Power | 5 V input, 1-2 A class | VRS | Radxa docs (5V/2A adapter rec) |
 | Linux | Debian/Ubuntu; RK3566 mainline U-Boot/Linux supported | VRS | Radxa docs, community |
-| Component height (top side) | UNKNOWN | UNKNOWN | board photos/drawing needed |
-| Mounting hole positions | UNKNOWN | UNKNOWN | mechanical drawing needed |
+| Component height (top side) | 8.5 mm max with 40-pin GPIO header; 3.0-3.5 mm budget without header | DERIVED | official STEP z-profile (cad/references/radxa-zero3w/height-profile.txt) |
+| Mounting hole positions | (3.55,3.6) (3.6,26.45) (61.4,3.6) (61.4,26.5), r=1.41 | VPS | official DXF circle extraction |
+| Below-board stack | up to -4.5 mm at USB-C/micro-HDMI edge | DERIVED | official STEP |
 | Availability | in distribution (multiple vendors) | VRS | vendor pages |
 
 Fit observation (preliminary, not a placement claim): 65x30 mm fits inside
@@ -27,6 +28,15 @@ the 169.4x71.4 body envelope; the binding constraint is HEIGHT (U1) around
 connectors (USB-C, micro-HDMI) and the 40-pin header if populated. The
 40-pin header can stay unpopulated on the shell side if our carrier
 interface is custom.
+
+Stacking probe result (cad/sbc_stack_probe.py, envelope-class, PROVISIONAL
+geometry, z0=8.3): rotated 90 deg (long axis along the body short axis),
+connectors facing the body center, the board fits with zero volume outside
+the body envelope at x0=135..137, y0=4..8 (3 positions PASS). Identity
+orientation (long axis along body length) does NOT fit at the right edge
+due to the corner radius (ESTIMATED r=6). This classifies the ZERO 3W as
+geometrically stackable in the right-hand region; real placement waits for
+U1-U3 (wall thickness, battery pocket, bosses, UMD door swing).
 
 ## Evaluation criteria (frozen for comparisons)
 

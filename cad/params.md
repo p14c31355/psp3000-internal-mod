@@ -58,11 +58,17 @@ param | value | class | source
 BOSS_XY | UNKNOWN | UNKNOWN | list of standoff XY positions (U3); donor
 BOSS_DIA | UNKNOWN | UNKNOWN | standoff bore diameter
 
-## Candidate SBC (Radxa ZERO 3W)
+## Candidate SBC (Radxa ZERO 3W) — V1.11, primary-source extracted
+
+Source: official Radxa 2D DXF (v1.11.0 top), 3D STEP, product brief.
+Stored under cad/references/radxa-zero3w/. DXF circle extraction + STEP
+bounding-box verified in FreeCAD (2026-10-13).
 
 param | value | class | source
 ---|---|---|---
-SBC_W | 65.0 | VRS | Radxa docs / vendor pages (65x30)
-SBC_D | 30.0 | VRS | same
-SBC_H_MAX | UNKNOWN | UNKNOWN | max component height incl. connectors on top; needs board photos + datasheet (open)
-SBC_HOLE_PITCH | UNKNOWN | UNKNOWN | mounting hole positions; needs mechanical drawing (open)
+SBC_W | 65.00 | VPS | DXF X extent 0.00..65.00
+SBC_D | 30.00 | VPS | DXF Y extent (30.21 incl. silkscreen overhang; board 30.0)
+SBC_HOLE_PITCH | (3.55,3.6) (3.6,26.45) (61.4,3.6) (61.4,26.5) | VPS | DXF CIRCLE r=1.41 (4x mounting holes)
+SBC_HOLE_R | 1.41 | VPS | same
+SBC_H_MAX | 8.5 (with 40-pin header) / 3.5 budget (header unpopulated) | DERIVED | STEP z-profile, see cad/references/radxa-zero3w/height-profile.txt
+SBC_STACK_BELOW | -4.5 max below board plane (USB-C/microHDMI edge) | DERIVED | same
