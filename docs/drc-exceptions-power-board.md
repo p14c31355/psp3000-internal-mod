@@ -9,6 +9,12 @@ Date: 2026-10-13.  Board: `pcb/power-board/power-board.kicad_pcb`.
   (0.08-0.12 mm measured vs 0.10 required), plus 3 GND-zone island
   ratsnest reports.  0 unrouted nets; no courtyard overlaps, no
   shorts.
+- Zone-island reports: the F.Cu ground pour fragments into 7 islands
+  around the dense passives; 13 stitching vias already tie most of
+  them to the B.Cu plane, but 3 island-pairs still report unconnected
+  because every clear spot tried so far either collides with a track
+  (0.08-0.12 mm) or sits inside a fill cut-out.  Adding more vias
+  fragments the pour further (verified: attempts increased the count).
 - Board outline: 48 x 36 mm - the largest rectangle inside the
   DERIVED 60 mm UMD disc cavity (`cad/power_board_sizing_probe.py`).
   All 21 footprints verified inside the outline (pad-extent check).
