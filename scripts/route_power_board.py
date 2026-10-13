@@ -67,16 +67,30 @@ def main():
         if gnd_ni is not None:
             z.SetNet(gnd_ni)
         z.SetLayer(pcbnew.B_Cu)
-        z.SetLocalClearance(int(0.3 * MM))
+        z.SetLocalClearance(int(0.25 * MM))
         z.SetIsFilled(False)
         outline = z.Outline()
         chain = outline.Outline(outline.NewOutline())
         for (x, y) in ((2.5, 2.5), (102.5, 2.5), (102.5, 42.5), (2.5, 42.5)):
             chain.Append(int(x * MM), int(y * MM))
         b.Add(z)
-        pcbnew.ZONE_FILLER(b).Fill([z])
+        # F.Cu GND zone as well: top-side GND pads must reach ground on
+        # their own layer (the B.Cu zone alone leaves them unconnected)
+        z2 = pcbnew.ZONE(b)
+        z2.SetNet(gnd_ni)
+        z2.SetLayer(pcbnew.F_Cu)
+        z2.SetLocalClearance(int(0.25 * MM))
+        z2.SetIsFilled(False)
+        outline2 = z2.Outline()
+        chain2 = outline2.Outline(outline2.NewOutline())
+        for (x, y) in ((2.5, 2.5), (102.5, 2.5), (102.5, 42.5), (2.5, 42.5)):
+            chain2.Append(int(x * MM), int(y * MM))
+        b.Add(z2)
+        z.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL)
+        z2.SetPadConnection(pcbnew.ZONE_CONNECTION_FULL)
+        pcbnew.ZONE_FILLER(b).Fill([z, z2])
         b.Save(PCB)
-        print("saved placement + GND zone only (routes pending)")
+        print("saved placement + GND zones F.Cu/B.Cu (routes pending)")
         return
     # deterministic column assignment
     net_names.sort()

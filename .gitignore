@@ -18,3 +18,8 @@ exports/
 
 # CAD temp
 *.FCStd1
+
+# freerouting jar (44MB, download from freerouting releases; see
+# scripts/pipeline-power-board.sh)
+tools/*.jar
+logs/
