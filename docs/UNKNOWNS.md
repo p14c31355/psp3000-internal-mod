@@ -91,3 +91,21 @@ precision, and why it matters. Blocked work is listed per entry.
 - Blocked: mechanical interference check of the breakout board (low risk:
   the board is a bench tool, not shell-mounted).
 - Status: OPEN (documented gap; does not gate the capture-board design).
+
+## U10: TPS62130 3D model missing (VQFN-16 3x3 EP1.45)
+
+- What: KiCad 10's Package_DFN_QFN.3dshapes has no STEP for
+  VQFN-16-1EP_3x3mm_P0.5mm_EP1.45x1.45mm (only Texas_RSA VQFN-16 4x4).
+- Why it matters: exports/power-board.step is missing U3, so mechanical
+  interference checks of the power board would silently exclude the
+  buck converter.
+- How to resolve: download the TI/Texas Instruments VQFN-16 (RGT)
+  STEP from ti.com's product folder or a paid CAD-model service, place
+  it under pcb/power-board/3dmodels/, and update U3's footprint 3D
+  field.  Alternatively switch the footprint to the 4x4 Texas_RSA
+  variant only if the datasheet confirms an RSA-package part number
+  (TPS62130RSA is a different package - verify before substituting).
+- Blocked: mechanical interference check of the power board (the board
+  is also still unrouted and an ESTIMATED 105x45 exploratory envelope,
+  so interference is not meaningful yet anyway).
+- Status: OPEN (does not gate the schematic, which is ERC-clean).
