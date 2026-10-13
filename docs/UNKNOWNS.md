@@ -109,3 +109,17 @@ precision, and why it matters. Blocked work is listed per entry.
   is also still unrouted and an ESTIMATED 105x45 exploratory envelope,
   so interference is not meaningful yet anyway).
 - Status: OPEN (does not gate the schematic, which is ERC-clean).
+
+## U11: STAT level shift for the Radxa GPIO (3.3 V max vs REGN 4.7 V)
+
+- What: the BQ25895 STAT open-drain output is currently pulled up to
+  REGN (4.7 V) by R8 on the power board, but the harness target is a
+  Radxa ZERO 3W GPIO whose absolute maximum is 3.63 V.
+- Why it matters: connecting J3.9 to the Radxa without changing the
+  pull-up rail would over-stress the SoC pin.
+- How to resolve: make STAT an open-drain net pulled up on the Radxa
+  side (3.3 V through the GPIO's internal/external pull-up) and remove
+  R8's REGN pull-up on the power board.  One schematic edit plus
+  re-route; scheduled for the next power-board schematic revision.
+- Blocked: nothing (design change, no measurement needed).
+- Status: OPEN (action scheduled).
