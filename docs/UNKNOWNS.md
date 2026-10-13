@@ -1,0 +1,125 @@
+# Unknown dimensions register
+
+Rule (AGENTS.md): an UNKNOWN is never silently replaced by a nominal value.
+Each entry states what to measure, between which surfaces, with what
+precision, and why it matters. Blocked work is listed per entry.
+
+## U1: Shell internal height profile
+- What: distance between inner floor (where the OEM motherboard sits) and
+  the inner face of the front shell / LCD frame, at a 10 mm grid over the
+  area x=[5..165], y=[5..66] (body coordinates, origin bottom-left of front
+  face).
+- Precision: 0.1 mm.
+- Why: determines maximum component height per region; blocks placement of
+  SBC, bridge board, battery.
+- How: donor unit, depth micrometer through removed UMD opening + under-LCD
+  region; or calipers at shell openings.
+- Blocked: Phase 3 placement, Phase 6 outlines.
+- Status: OPEN.
+
+## U2: UMD cavity free volume after drive removal
+- What: bounding box of the cavity plus obstruction map (screw bosses,
+  ribs, lid hinge swing envelope), donor unit.
+- Precision: 0.5 mm envelope; bosses to 0.2 mm.
+- Why: candidate SBC home; UMD-door clearance drives max height there.
+- How: calipers + hinge swing photos; 3D scan preferred if available.
+- Blocked: SBC selection freeze, door-latch verification.
+- Status: OPEN.
+
+## U3: Screw boss positions (motherboard region)
+- What: XY of standoffs that accept OEM screws on the rear shell floor,
+  diameters, thread spec (likely Phillips M1.7/M2 class).
+- Why: new mainboard must reuse OEM bosses; do not drill the shell.
+- How: donor, calipers; cross-check iFixit TA-090 teardown photos.
+- Blocked: Phase 6 board outline + mounting holes.
+- Status: OPEN.
+
+## U4: Battery pocket and connector
+- What: pocket inner dimensions; connector housing part number and pinout
+  (terminals: P+, P-, TH/ID, possibly NTC).
+- Why: charging design and mechanical retention; safety-critical (M4).
+- How: donor; continuity-map connector pins to battery terminals with a
+  multimeter; measure pocket.
+- Blocked: Phase 5 power architecture freeze.
+- Status: OPEN.
+
+## U5: Button membrane electrical map
+- What: connector pin to button mapping; series resistance per contact;
+  analog stick pot end-to-end resistance and wiper ranges.
+- Why: control board scan matrix design.
+- How: donor + multimeter; photograph membranes.
+- Blocked: control schematic (Phase 5/6).
+- Status: OPEN.
+
+## U6: SVDI symbol packing
+- What: bit-level mapping of RGB888+syncs onto DATA1/DATA2 pairs between
+  start/end codes (codes themselves are documented: VF=FF000003h,
+  HF=FF000005h, VE=FF00000Ah, HE=FF000009h).
+- Why: FPGA bridge TX RTL correctness.
+- How: (a) locate Samantha (LR388G1) functional datasheet via Sharp/Sony
+  channels; or (b) donor console: probe LCD FPC with a fast logic analyzer /
+  SerDes capture at 54 MHz DDR and correlate with a known test pattern.
+- Blocked: Phase 4 final architecture decision (bridge vs. alternate panel),
+  Phase 6 bridge schematic.
+- Status: OPEN — highest-risk unknown of the project.
+
+## U7: FCC internal photos (secondary corroboration)
+- What: AK8PSP3001/-D/-E internal photo PDFs from fcc.gov (fccid.io is
+  bot-walled; archive.org was temporarily offline during attempt).
+- Why: corroborate U1-U3 without a donor.
+- How: retry fcc.gov OET or archive.org later.
+- Blocked: nothing (corroboration only).
+- Status: OPEN.
+
+## U8: Speaker driver impedance and placement
+- What: speaker nominal impedance (expect 8 ohm, verify), cavity positions.
+- Why: amp selection (Phase 5).
+- How: donor, ohmmeter.
+- Blocked: amp part choice only.
+- Status: OPEN.
+
+## U9: J1 (Amphenol F32Q-31P) 3D model availability
+- What: No vendor STEP model ships with KiCad 10 for the Amphenol F32Q
+  0.5 mm 31-pin FPC connector (only Hirose FH12 30S/32S and FH26 31S/0.6 mm
+  exist in the standard 3D library).
+- Why it matters: STEP export of the SVDI breakout board currently contains
+  the board outline and J2 only; J1 is missing from the mechanical check.
+- How to resolve: download the Amphenol F32Q STEP from amphenol-icc.com
+  (drawing f32q-f32t.pdf links the 3D model), place it under
+  pcb/svdi-breakout/3dmodels/, and reference it with an absolute-ish path
+  or ${KIPRJMOD}.
+- Blocked: mechanical interference check of the breakout board (low risk:
+  the board is a bench tool, not shell-mounted).
+- Status: OPEN (documented gap; does not gate the capture-board design).
+
+## U10: TPS62130 3D model missing (VQFN-16 3x3 EP1.45)
+
+- What: KiCad 10's Package_DFN_QFN.3dshapes has no STEP for
+  VQFN-16-1EP_3x3mm_P0.5mm_EP1.45x1.45mm (only Texas_RSA VQFN-16 4x4).
+- Why it matters: exports/power-board.step is missing U3, so mechanical
+  interference checks of the power board would silently exclude the
+  buck converter.
+- How to resolve: download the TI/Texas Instruments VQFN-16 (RGT)
+  STEP from ti.com's product folder or a paid CAD-model service, place
+  it under pcb/power-board/3dmodels/, and update U3's footprint 3D
+  field.  Alternatively switch the footprint to the 4x4 Texas_RSA
+  variant only if the datasheet confirms an RSA-package part number
+  (TPS62130RSA is a different package - verify before substituting).
+- Blocked: mechanical interference check of the power board (the board
+  is also still unrouted and an ESTIMATED 105x45 exploratory envelope,
+  so interference is not meaningful yet anyway).
+- Status: OPEN (does not gate the schematic, which is ERC-clean).
+
+## U11: STAT level shift for the Radxa GPIO (3.3 V max vs REGN 4.7 V)
+
+- What: the BQ25895 STAT open-drain output is currently pulled up to
+  REGN (4.7 V) by R8 on the power board, but the harness target is a
+  Radxa ZERO 3W GPIO whose absolute maximum is 3.63 V.
+- Why it matters: connecting J3.9 to the Radxa without changing the
+  pull-up rail would over-stress the SoC pin.
+- How to resolve: make STAT an open-drain net pulled up on the Radxa
+  side (3.3 V through the GPIO's internal/external pull-up) and remove
+  R8's REGN pull-up on the power board.  One schematic edit plus
+  re-route; scheduled for the next power-board schematic revision.
+- Blocked: nothing (design change, no measurement needed).
+- Status: OPEN (action scheduled).

@@ -1,0 +1,8 @@
+(fp_lib_table
+  (lib (name "Connector_USB")(type "KiCad")(uri "/usr/share/kicad/footprints/Connector_USB.pretty")(options "")(descr "KiCad Connector USB"))
+  (lib (name "Resistor_SMD")(type "KiCad")(uri "/usr/share/kicad/footprints/Resistor_SMD.pretty")(options "")(descr "KiCad Resistor SMD"))
+  (lib (name "Package_DFN_QFN")(type "KiCad")(uri "/usr/share/kicad/footprints/Package_DFN_QFN.pretty")(options "")(descr "KiCad DFN QFN"))
+  (lib (name "Package_TO_SOT_SMD")(type "KiCad")(uri "/usr/share/kicad/footprints/Package_TO_SOT_SMD.pretty")(options "")(descr "KiCad TO SOT"))
+  (lib (name "Connector_JST")(type "KiCad")(uri "/usr/share/kicad/footprints/Connector_JST.pretty")(options "")(descr "KiCad JST"))
+  (lib (name "Connector_PinHeader_2.54mm")(type "KiCad")(uri "/usr/share/kicad/footprints/Connector_PinHeader_2.54mm.pretty")(options "")(descr "KiCad PinHeader"))
+)
