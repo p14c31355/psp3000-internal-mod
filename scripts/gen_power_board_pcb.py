@@ -26,8 +26,8 @@ NETLIST = "pcb/power-board/power-board.net"
 # Board outline: generous workspace for a power board that lives in the
 # UMD cavity region; final size derives from cad/params.md (U1-U5 donor
 # measurements pending, so this is an exploratory ESTIMATED envelope).
-BOARD_W = 105.0
-BOARD_H = 45.0
+BOARD_W = 48.0
+BOARD_H = 36.0
 
 
 def parse_netlist(path):
@@ -56,23 +56,31 @@ def fp_path(nick, fp):
 # Positions are ESTIMATED exploratory placement (U1-U5 donor measurements
 # pending); the co-design loop will move them.
 PLACEMENT = {
-    "J1": ("Connector_USB", "USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal", 33.0, 10.0, 0),
-    "U1": ("Package_DFN_QFN", "Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm", 30.0, 20.0, 0),
-    "U2": ("Package_TO_SOT_SMD", "SOT-23-6", 42.0, 28.0, 0),
-    "Q1": ("Package_TO_SOT_SMD", "SOT-23-6", 48.0, 28.0, 0),
-    "J2": ("Connector_JST", "JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal", 19.0, 32.0, 0),
-    "U3": ("Package_DFN_QFN", "VQFN-16-1EP_3x3mm_P0.5mm_EP1.45x1.45mm", 42.0, 12.0, 0),
-    "L1": ("Inductor_SMD", "L_0805_2012Metric", 68.0, 30.0, 0),
-    "J3": ("Connector_PinHeader_2.54mm", "PinHeader_2x05_P2.54mm_Vertical", 50.0, 12.0, 90),
-    "R1": ("Resistor_SMD", "R_0402_1005Metric", 26.0, 32.0, 0),
-    "R2": ("Resistor_SMD", "R_0402_1005Metric", 28.0, 32.0, 0),
-    "R3": ("Resistor_SMD", "R_0402_1005Metric", 30.0, 32.0, 0),
-    "R4": ("Resistor_SMD", "R_0402_1005Metric", 32.0, 32.0, 0),
-    "R5": ("Resistor_SMD", "R_0402_1005Metric", 34.0, 32.0, 0),
-    "R6": ("Resistor_SMD", "R_0402_1005Metric", 68.0, 3.8, 0),
-    "R7": ("Resistor_SMD", "R_0402_1005Metric", 71.0, 3.8, 0),
-    "R8": ("Resistor_SMD", "R_0402_1005Metric", 74.0, 3.8, 0),
-    "R9": ("Resistor_SMD", "R_0402_1005Metric", 77.0, 3.8, 0),
+    # 48 x 36 board.  USB-C rotated 90 deg (body extends +x from origin):
+    # at (2,10) rot=90 the body spans roughly x 2..12, y 2..50 -> too tall;
+    # keep horizontal at the left edge with origin pushed right so the
+    # shell body starts at x~1.
+    "J1": ("Connector_USB", "USB_C_Receptacle_GCT_USB4105-xx-A_16P_TopMnt_Horizontal", 11.0, 10.0, 0),
+    "U1": ("Package_DFN_QFN", "Texas_RTW_WQFN-24-1EP_4x4mm_P0.5mm_EP2.7x2.7mm", 22.0, 14.0, 0),
+    "U2": ("Package_TO_SOT_SMD", "SOT-23-6", 30.5, 24.5, 0),
+    "Q1": ("Package_TO_SOT_SMD", "SOT-23-6", 33.0, 20.0, 0),
+    "J2": ("Connector_JST", "JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal", 13.0, 28.0, 0),
+    "U3": ("Package_DFN_QFN", "VQFN-16-1EP_3x3mm_P0.5mm_EP1.45x1.45mm", 38.0, 8.0, 0),
+    "L1": ("Inductor_SMD", "L_0805_2012Metric", 42.0, 14.0, 0),
+    "J3": ("Connector_PinHeader_2.54mm", "PinHeader_2x05_P2.54mm_Vertical", 38.0, 25.0, 0),
+    "R1": ("Resistor_SMD", "R_0402_1005Metric", 18.4, 5.5, 0),
+    "R2": ("Resistor_SMD", "R_0402_1005Metric", 20.8, 5.5, 0),
+    "R3": ("Resistor_SMD", "R_0402_1005Metric", 24.0, 20.0, 0),
+    "R4": ("Resistor_SMD", "R_0402_1005Metric", 26.0, 22.0, 0),
+    "R5": ("Resistor_SMD", "R_0402_1005Metric", 28.0, 22.0, 0),
+    "R6": ("Resistor_SMD", "R_0402_1005Metric", 23.2, 5.5, 0),
+    "R7": ("Resistor_SMD", "R_0402_1005Metric", 25.6, 5.5, 0),
+    "R9": ("Resistor_SMD", "R_0402_1005Metric", 28.0, 5.5, 0),
+    "R10": ("Resistor_SMD", "R_0402_1005Metric", 30.4, 5.5, 0),
+    "R11": ("Resistor_SMD", "R_0402_1005Metric", 32.8, 5.5, 0),
+    "R12": ("Resistor_SMD", "R_0402_1005Metric", 35.2, 5.5, 0),
+    "C1": ("Capacitor_SMD", "C_0805_2012Metric", 21.0, 32.0, 0),
+    "C2": ("Capacitor_SMD", "C_0402_1005Metric", 24.0, 32.0, 0),
 }
 
 # net colors: which layer carries which class of net (F.Cu horizontal

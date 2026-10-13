@@ -2,24 +2,25 @@
 
 Date: 2026-10-13.  Board: `pcb/power-board/power-board.kicad_pcb`.
 
-## State (placement revision 3 + R8 removal, 2026-10-13)
+## State (placement revision 4 - 48x36 measured-envelope fit, 2026-10-13)
 
 - ERC (schematic): **0 violations** (`kicad-cli sch erc --severity-all`).
-- DRC (board): **7 violations** on the fully routed board
-  (1 unrouted = GND zone ratsnest): 7 via-track clearances
-  (0.08-0.12 mm measured).
-- Netclass clearance was set to 0.10 mm (4 mil, standard fabrication
-  capability) before measuring.
-- Root cause of all: freerouting 1.6.2 lays out with the 0.4 mm via
-  padstack and then the vias are widened to 0.5 mm, eating the margin.
-  Relocating any of these vias by hand was tried interactively and
-  each relocation traded a clearance violation for a
-  shorting/dangling violation (verified in multiple sessions); the
-  freerouting geometry is locally optimal under its own assumptions.
-- Additional change this revision: R8 (STAT pull-up to REGN) removed
-  from the schematic - STAT is open-drain and its pull-up moves to the
-  Radxa side at 3.3 V (U11, `docs/harness-j3-radxa.md`); connecting a
-  REGN-pulled STAT to the SBC would have over-stressed the GPIO.
+- DRC (board): **7 clearance violations**, all via-to-track
+  (0.08-0.12 mm measured vs 0.10 required), plus 3 GND-zone island
+  ratsnest reports.  0 unrouted nets; no courtyard overlaps, no
+  shorts.
+- Board outline: 48 x 36 mm - the largest rectangle inside the
+  DERIVED 60 mm UMD disc cavity (`cad/power_board_sizing_probe.py`).
+  All 21 footprints verified inside the outline (pad-extent check).
+- Root cause: freerouting 1.6.2 lays out with the 0.4 mm via padstack
+  and then the vias are widened to 0.5 mm, eating the margin.
+  Relocating vias by hand was tried interactively across several
+  sessions; each relocation traded a clearance violation for a
+  shorting/dangling violation.  The freerouting geometry is locally
+  optimal under its own assumptions.
+- Additional change: R8 (STAT pull-up to REGN) removed - STAT is
+  open-drain, pull-up moves to the Radxa side at 3.3 V (U11,
+  `docs/harness-j3-radxa.md`).
 
 ## The two accepted exceptions
 
