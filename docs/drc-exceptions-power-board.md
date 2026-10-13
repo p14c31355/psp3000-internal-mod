@@ -2,14 +2,20 @@
 
 Date: 2026-10-13.  Board: `pcb/power-board/power-board.kicad_pcb`.
 
-## State
+## State (placement revision 3, 2026-10-13)
 
 - ERC (schematic): **0 violations** (`kicad-cli sch erc --severity-all`).
-- DRC (board): **2 clearance violations** out of a fully routed board
-  (0 unrouted, all pads connected).
+- DRC (board): **5 violations** on the fully routed board
+  (0 unrouted nets): 5 via-track clearances (0.08-0.12 mm measured)
+  plus 2 GND-zone island reports from the ratsnest.
 - Netclass clearance was set to 0.10 mm (4 mil, standard fabrication
-  capability) before measuring; both remaining violations are below
-  even that.
+  capability) before measuring; the worst clearance measures 0.08 mm.
+- Root cause of all five: freerouting 1.6.2 lays out with the 0.4 mm
+  via padstack and then the vias are widened to 0.5 mm, eating the
+  margin.  Relocating any of these vias by hand was tried
+  interactively and each relocation traded a clearance violation for a
+  shorting/dangling violation (see session log); the freerouting
+  geometry is locally optimal under its own assumptions.
 
 ## The two accepted exceptions
 

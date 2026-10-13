@@ -62,9 +62,28 @@ def main():
             trk.append((s[0], s[1]))
             trk.append((e[0], e[1]))
 
-    def clear(x, y, r=0.9e6):
-        for (px, py) in pads + trk + existing:
+    # full track segments (both layers) so mid-track crossings are caught
+    segs = []
+    for t in b.GetTracks():
+        if isinstance(t, pcbnew.PCB_TRACK):
+            s = t.GetStart()
+            e = t.GetEnd()
+            segs.append((s[0], s[1], e[0], e[1]))
+
+    def clear(x, y, r=0.8e6):
+        for (px, py) in pads + existing:
             if abs(px - x) < r and abs(py - y) < r:
+                return False
+        for (x1, y1, x2, y2) in segs:
+            # point-to-segment distance (integer um)
+            dx, dy = x2 - x1, y2 - y1
+            L2 = dx * dx + dy * dy
+            if L2 == 0:
+                d2 = (x - x1) ** 2 + (y - y1) ** 2
+            else:
+                tt = max(0, min(1, ((x - x1) * dx + (y - y1) * dy) / L2))
+                d2 = (x - x1 - tt * dx) ** 2 + (y - y1 - tt * dy) ** 2
+            if d2 < r * r:
                 return False
         return True
 
