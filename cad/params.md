@@ -72,3 +72,28 @@ SBC_HOLE_PITCH | (3.55,3.6) (3.6,26.45) (61.4,3.6) (61.4,26.5) | VPS | DXF CIRCL
 SBC_HOLE_R | 1.41 | VPS | same
 SBC_H_MAX | 8.5 (with 40-pin header) / 3.5 budget (header unpopulated) | DERIVED | STEP z-profile, see cad/references/radxa-zero3w/height-profile.txt
 SBC_STACK_BELOW | -4.5 max below board plane (USB-C/microHDMI edge) | DERIVED | same
+
+## TA-090 motherboard (donor board) — iFixit photo-derived estimates
+
+Source: iFixit PSP 300x Teardown (guide 1298), step-21 photos of the
+removed TA-090v1 board (fetched 2026-10-13 via the iFixit guide API;
+images under /tmp cache, re-fetchable).  All values ESTIMATED from
+perspective-distorted photos with no scale reference; they may inform
+exploratory keepouts only and must be replaced with MEASURED values
+before any fit claim (U1-U3 remain UNKNOWN).
+
+param | value | class | source
+---|---|---|---
+MB_SHAPE | L-shape: main body + narrow right arm | ESTIMATED | iFixit step-21 photo (board outline is an irregular rectangle with a long arm to the right, not a plain rectangle)
+MB_BODY_RATIO_W_D | ~1.3:1 (main body, width:depth) | ESTIMATED | same, perspective-corrected +-5%
+MB_ARM_FRACTION | arm length ~0.6-0.8x body width | ESTIMATED | pixel ratio analysis of step-21_17264.jpg
+MB_ARM_WIDTH_FRACTION | arm width ~0.2-0.25x body depth | ESTIMATED | same
+MB_SCREWS | 2-3 plated holes on left edge (top/bottom corners), arm fixed via sub-board connector | ESTIMATED | same
+MB_CUTOUTS | large rectangular openings on the left edge (button contacts exposed through the board), curve cutout bottom-center | ESTIMATED | same
+MB_WLAN | wireless module sits on the arm end, under a metal shield | ESTIMATED | same
+MB_LCD_FPC | wide ZIF connector under the SoC shield, board left-center | ESTIMATED | same
+
+Derived implication for the mod: the stock board's L-shape leaves the
+UMD-cavity region (right, above the arm) free in the Z stack; our
+replacement PCBs should target the same main-body zone plus the cavity,
+not a single full-width rectangle.
