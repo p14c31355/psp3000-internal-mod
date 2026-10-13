@@ -559,9 +559,12 @@ def build_stage5():
         175.0, 40.0, "Device", "R", "R5")
     _pin_stub(r5, "1", "CE", "r5", _pin_side(r5, "1", 175.0))
     _pin_stub(r5, "2", "REGN", "r5", _pin_side(r5, "2", 175.0))
-    # R6/R7/R8: I2C + STAT/INT pullups to REGN
+    # R6/R7/R9: I2C + INT pullups to REGN.  R8 (STAT) is intentionally
+    # absent: STAT is open-drain and its pull-up lives on the Radxa side
+    # (3.3 V) - see docs/harness-j3-radxa.md and UNKNOWNS U11.  Pulling
+    # STAT to REGN (4.7 V) would over-stress the SBC GPIO.
     for ref, net, x in (("R6", "SCL", 165.0), ("R7", "SDA", 175.0),
-                        ("R8", "STAT", 185.0), ("R9", "INT", 195.0)):
+                        ("R9", "INT", 195.0)):
         r = SCHEMATIC.instance(
             ref, "10k", "Resistor_SMD:R_0402_1005Metric",
             x, 30.0, "Device", "R", ref)
