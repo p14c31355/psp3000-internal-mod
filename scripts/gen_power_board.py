@@ -184,6 +184,8 @@ class Schematic:
     def pwr_flag(self, x, y, net, tag):
         # PWR_FLAG symbol from power lib: place and label the net
         self.add_lib("power", "PWR_FLAG", LIBS_TEXT["power"])
+        self._flg_n = getattr(self, '_flg_n', 0) + 1
+        flg_ref = f"#FLG{self._flg_n:02d}"
         self.parts.append(
             f'\t(symbol\n\t\t(lib_id "power:PWR_FLAG")\n'
             f'\t\t(at {x:.2f} {y:.2f} 0)\n\t\t(unit 1)\n'
@@ -205,7 +207,7 @@ class Schematic:
             f'\t\t(pin "1"\n\t\t\t(uuid "{gen_uuid("pf-pin-" + tag)}")\n\t\t)\n'
             f'\t\t(instances\n\t\t\t(project "power-board"\n'
             f'\t\t\t\t(path "/{PROJECT_UUID}"\n'
-            f'\t\t\t\t\t(reference "#FLG01")\n\t\t\t\t\t(unit 1)\n'
+            f'\t\t\t\t\t(reference "{flg_ref}")\n\t\t\t\t\t(unit 1)\n'
             f'\t\t\t\t)\n\t\t\t)\n\t\t)\n\t)')
         if net == "GND":
             # a plain local label named GND collides with the global
@@ -368,7 +370,6 @@ def build_stage2():
     # pin is reported as isolated_pin_label by KiCad 10 ERC).
     netmap = {
         "1": "VBUS",       # VBUS
-        "2": "USB_DP", "3": "USB_DM",
         "4": "STAT", "5": "SCL", "6": "SDA", "7": "INT",
         "8": "OTG", "9": "CE",
         "10": "ILIM",
@@ -377,10 +378,15 @@ def build_stage2():
         "15": "SYS", "16": "SYS",
         "17": "GND", "18": "GND",
         "19": "SW", "20": "SW", "21": "BTST", "22": "REGN",
-        "23": "PMID", "24": "DSEL",
+        "23": "PMID",
     }
     for num, net in netmap.items():
         _pin_stub(pins, num, net, "u1", _pin_side(pins, num, 199.39))
+    # USB data pins unused: charging-only design, BC1.2 detection off
+    # (DSEL low below), so D+/D- are explicitly unconnected
+    for num in ("2", "3", "24"):
+        if num in pins:
+            SCHEMATIC.no_connect(pins[num][0], pins[num][1], f"u1-nc{num}")
     # exposed pad (25) = PGND tie
     if "25" in pins:
         x, y, _l25, _a25 = pins["25"]
@@ -462,7 +468,7 @@ def build_stage3():
     j2c = 175.0
     # battery connector: pin1 = BAT+ (pack positive), pin2 = BAT- (pack neg)
     _pin_stub(j2, "1", "BAT", "j2", RIGHT)
-    _pin_stub(j2, "2", "BATGND", "j2", RIGHT)
+    _pin_stub(j2, "2", "PACKNEG", "j2", RIGHT)
     # DW01A: VCC (pin? per DW01A SOT-23-6: 1=OD 2=CS 3=OC 4=TD 5=NC 6=VCC
     # per SparkFun DW01-P: 1 OD, 2 CS (current sense / GND), 3 OC, 4 TD
     # (test), 5 NC, 6 VCC. GND is pin 2 (CS is the GND/current sense).
@@ -561,6 +567,37 @@ def build_stage5():
             x, 30.0, "Device", "R", ref)
         _pin_stub(r, "1", net, ref.lower(), _pin_side(r, "1", x))
         _pin_stub(r, "2", "REGN", ref.lower(), _pin_side(r, "2", x))
+    # C1 PMID bypass 8.2uF (datasheet no-OTG value), PMID -> GND
+    c1 = SCHEMATIC.instance(
+        "C1", "8.2uF", "Capacitor_SMD:C_0805_2012Metric",
+        205.0, 40.0, "Device", "C", "C1")
+    _pin_stub(c1, "1", "PMID", "c1", _pin_side(c1, "1", 205.0))
+    _pin_stub(c1, "2", "GND", "c1", _pin_side(c1, "2", 205.0))
+    # C2 bootstrap cap 0.047uF BTST -> SW (datasheet)
+    c2 = SCHEMATIC.instance(
+        "C2", "47nF", "Capacitor_SMD:C_0402_1005Metric",
+        215.0, 40.0, "Device", "C", "C2")
+    _pin_stub(c2, "1", "BTST", "c2", _pin_side(c2, "1", 215.0))
+    _pin_stub(c2, "2", "SW", "c2", _pin_side(c2, "2", 215.0))
+    # TS divider: R10 REGN->TS, R11 TS->GND (103AT-2 style mid-scale,
+    # enables charging without an NTC for bench bring-up; the donor
+    # pack NTC replaces R11 at integration time)
+    r10 = SCHEMATIC.instance(
+        "R10", "10k", "Resistor_SMD:R_0402_1005Metric",
+        225.0, 40.0, "Device", "R", "R10")
+    _pin_stub(r10, "1", "REGN", "r10", _pin_side(r10, "1", 225.0))
+    _pin_stub(r10, "2", "TS", "r10", _pin_side(r10, "2", 225.0))
+    r11 = SCHEMATIC.instance(
+        "R11", "10k", "Resistor_SMD:R_0402_1005Metric",
+        235.0, 40.0, "Device", "R", "R11")
+    _pin_stub(r11, "1", "TS", "r11", _pin_side(r11, "1", 235.0))
+    _pin_stub(r11, "2", "GND", "r11", _pin_side(r11, "2", 235.0))
+    # R12 PG33 pullup to VOS33 (open-drain power-good)
+    r12 = SCHEMATIC.instance(
+        "R12", "10k", "Resistor_SMD:R_0402_1005Metric",
+        245.0, 40.0, "Device", "R", "R12")
+    _pin_stub(r12, "1", "PG33", "r12", _pin_side(r12, "1", 245.0))
+    _pin_stub(r12, "2", "VOS33", "r12", _pin_side(r12, "2", 245.0))
     # power flags so ERC sees GND and BAT as driven sources
     SCHEMATIC.pwr_flag(139.7, 129.54, "GND", "gnd")
     SCHEMATIC.pwr_flag(149.86, 129.54, "BAT", "bat")

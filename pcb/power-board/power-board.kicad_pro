@@ -1,16 +1,59 @@
 {
-  "board": {},
-  "meta": {"filename": "power-board.kicad_pro", "version": 3},
-  "net_settings": {"classes": [{"name": "Default", "clearance": 0.13,
-      "track_width": 0.2, "via_diameter": 0.4, "via_drill": 0.2}],
-    "meta": {"version": 4}},
+  "board": {
+    "design_settings": {
+      "rules": {
+        "min_hole_clearance": 0.15,
+        "min_hole_to_hole": 0.2,
+        "min_through_hole_diameter": 0.3,
+        "min_via_diameter": 0.4,
+        "min_copper_edge_clearance": 0.3
+      }
+    }
+  },
+  "meta": {
+    "filename": "power-board.kicad_pro",
+    "version": 3
+  },
+  "net_settings": {
+    "classes": [
+      {
+        "name": "Default",
+        "clearance": 0.13,
+        "track_width": 0.2,
+        "via_diameter": 0.4,
+        "via_drill": 0.2
+      }
+    ],
+    "meta": {
+      "version": 4
+    }
+  },
   "boards": [],
-  "cvpcb": {"equivalence_files": []},
-  "libraries": {"pinned_footprint_libs": [], "pinned_symbol_libs": []},
-  "pcbnew": {"last_paths": {}, "page_layout_descr_file": ""},
-  "schematic": {"legacy_lib_dir": "", "legacy_lib_list": [],
-    "meta": {"version": 1}, "page_layout_descr_file": "",
-    "plot_directory": ""},
-  "sheets": [["e2f3a4b5-6c7d-4e8f-9a01-b2c3d4e5f607", "Root"]],
+  "cvpcb": {
+    "equivalence_files": []
+  },
+  "libraries": {
+    "pinned_footprint_libs": [],
+    "pinned_symbol_libs": []
+  },
+  "pcbnew": {
+    "last_paths": {},
+    "page_layout_descr_file": ""
+  },
+  "schematic": {
+    "legacy_lib_dir": "",
+    "legacy_lib_list": [],
+    "meta": {
+      "version": 1
+    },
+    "page_layout_descr_file": "",
+    "plot_directory": ""
+  },
+  "sheets": [
+    [
+      "e2f3a4b5-6c7d-4e8f-9a01-b2c3d4e5f607",
+      "Root"
+    ]
+  ],
   "text_variables": {}
 }
