@@ -23,3 +23,7 @@ exports/
 # scripts/pipeline-power-board.sh)
 tools/*.jar
 logs/
+
+# BitBuilt 3D scan meshes (433MB, re-downloadable from the BitBuilt thread)
+cad/references/bitbuilt-psp3000/scan/
+cad/references/xovi-shell-kit/build-guide.pdf
