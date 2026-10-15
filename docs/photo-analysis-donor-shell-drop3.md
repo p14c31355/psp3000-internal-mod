@@ -19,20 +19,36 @@ confirmation.
   50 mm (y 14..64), so a 40 mm readable insert is plausible for a
   straight-line partial depth, not the full opening.
 
-## Shot 164249_13731 (16:42) — steel ruler into a recess
+## Shot 164249_13731 (16:42) — steel ruler into a recess — CONFIRMED
 
-- Steel ruler pressed vertically into a rectangular recess in the
-  inner frame; the measured face aligns at ≈ **20 mm**.
-- Shell inner face up; a sliver of the green main board visible
-  top-left.
-- **Interpretation (to confirm):** a z-depth (thickness-direction)
-  read of ~20 mm.  REFERENCE_SCAN cross-check: the UMD cavity rim
-  band is z 7.7..9.9 with floor at 1.5 — a 20 mm read does NOT match
-  the UMD cavity (7-8 mm expected).  The 20 mm recess is therefore
-  likely a DIFFERENT pocket (battery bay region or a main-board
-  pocket) — or the ruler zero rests on the table plane with the
-  shell's outer face at 20 (which would match the earlier 13724
-  depth shot: 20 mm mark ≈ rear outer face).
+**User confirmation (2026-10-15):** the ruler's **zero rests on the
+inside (back) of the UMD lid**.  So the ~20 mm reading is the distance
+from the UMD lid's inner face to the measured face.
+
+- Cross-check with the scan: the UMD lid itself is a ~1.4-2 mm thin
+  shell; the lid's inner face sits just below the rim band (rim z
+  7.7-9.9 in body coords).  A 20 mm span from the lid's inner face
+  reaches well past the cavity floor level (floor visible at z
+  1.27-3.08) — consistent with the ruler crossing the cavity and
+  landing on the structure at its bottom (disc-well floor / bracket).
+- **Working value (donor-measured, pending one more read):** UMD lid
+  inner face → cavity bottom structure ≈ **20 mm**.  This bounds the
+  cavity's z depth from the door side: door-side available stack depth
+  ≈ 20 mm minus the lid thickness — far more than the 7-8 mm that the
+  battery-side rim band suggested, which means the cavity is deeper
+  than the battery-side rim implies and the door-trough side is the
+  generous direction.
+
+## Consequence for OP-B (upgrade in confidence)
+
+The OP-B split-z placement's binding constraint was the rim height
+(0.98 mm headroom at the battery side).  With a ~20 mm door-side
+depth, the second level (over the trough, under the lid) has real
+room: lid inner face minus ~1.4-2 mm lid + 20 mm span reaches the
+bottom structure; a board + components (1.2 + 5.0 = 6.2 mm) fits
+under the lid with large margin.  The cut study must now verify what
+structure the ruler landed on at the 20 mm face (if it is the drive
+mount bracket, that bracket is UMD-mechanism-only and may be cut).
 
 ## What this pair would establish once confirmed
 
@@ -42,9 +58,9 @@ floor → recess rim", we have the first true U1-style interior depth
 number, and the recess identity (UMD cavity vs battery bay vs MB
 pocket) decides where it lands in the UNKNOWNS register.
 
-## User confirmation request (pending)
+## User confirmation status
 
-Which surface the 40 mm (13730) and 20 mm (13731) readings refer to:
-the tape/ruler zero face, and the face at the reading.  With that,
-both numbers get recorded as real donor measurements in UNKNOWNS
-U1/U2 and the OP-B trough-ceiling keepout can be built.
+- **13731 (20 mm): CONFIRMED** — ruler zero = UMD lid's inner face.
+  Donor-measured span lid-inner-face → bottom structure ≈ 20 mm.
+- **13730 (40 mm): still pending** — which face the tape zero rests
+  on.  Once confirmed it lands in U2 (cavity long-axis) or U1.
