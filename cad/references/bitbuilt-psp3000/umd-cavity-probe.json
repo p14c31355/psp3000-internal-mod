@@ -1,0 +1,33 @@
+{
+  "class": "REFERENCE_SCAN",
+  "source": "BitBuilt PSP 3000 rear.stl, body coords (1mm grid zmax)",
+  "cavity_opening_visible": {
+    "x_mm": [
+      118,
+      168
+    ],
+    "y_mm": [
+      12,
+      66
+    ],
+    "width_mm": 50,
+    "height_mm": 54,
+    "area_mm2": 1675,
+    "equivalent_circle_diameter_mm": 46.2,
+    "centroid_mm": [
+      141.7,
+      36.2
+    ]
+  },
+  "floor_z_visible": {
+    "p10": 1.27,
+    "median": 1.55,
+    "p90": 3.08
+  },
+  "rim_z": {
+    "median": 8.73,
+    "note": "cavity wall top band, z 7.7-9.9 mm"
+  },
+  "interpretation": "The deep-visible opening is the region where the disc-well floor is seen from the battery side. The full cavity is larger in X than the visible band (the drive well extends under the door trough on the door side); the owner-directed cut study must add the door-trough region from the front/UMD lid scans before declaring the usable volume.",
+  "body_thickness_datum": "rear outer face = z 0"
+}
