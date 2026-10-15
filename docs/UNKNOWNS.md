@@ -136,8 +136,14 @@ precision, and why it matters. Blocked work is listed per entry.
   decides the panel candidate (display-candidates.md #1 vs #3) and
   whether the bridge sits directly behind the module.
 - How: donor shell, depth gauge through the window at ≥5 points.
+- PHOTO UPDATE (2026-10-15, drop 2): a clear reproduction FRONT SHELL
+  (skeleton, new-in-bag) is in hand — ribs/bosses visible through the
+  plastic, display window + blue center ring (~Ø50 mm).  A straight-on
+  window close-up with the ruler across the window edge can now answer
+  the bezel-width half of this unknown without disassembly.
 - Blocked: panel order, bridge board outline, display stack freeze.
-- Status: OPEN — **top v2 mechanical blocker**.
+- Status: OPEN — top v2 mechanical blocker (skeleton shell enables
+  the measurement).
 
 ## U13: Bezel lip width and window border (NEW, v2)
 
