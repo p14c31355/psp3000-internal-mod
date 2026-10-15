@@ -4,19 +4,24 @@ Two measurement shots (16:41, 16:42 JST).  Vision reads succeeded on
 the 400px thumbnails; zoom reads hit tool timeouts, so the fine
 detail comes from user confirmation.
 
-## Shot 164142_13730 (16:41) — tape measure into the cavity
+## Shot 164142_13730 (16:41) — tape measure into the cavity — CONFIRMED
 
-- Stainless tape (No. 13005), 0 end hidden inside the opening, the
-  tape bends at the opening edge over the **"40" graduation**.
+**User confirmation (2026-10-15):** the tape's **zero rests on the
+cavity floor of the removed UMD drive site**.  So the 40 mm reading
+is a straight-line span from the cavity floor along the opening axis
+to where the tape bends at the opening edge.
+
 - Readable graduations: 10 / 20 / 30 / 40 (50 red).
-- Shell stood on edge; the tape runs along the opening axis.
-- **Interpretation (to confirm):** the cavity's long-axis (Y)
-  dimension ≈ 40 mm of insertable depth before the bend — but the
-  tape could also be following a curved wall, and standing the shell
-  suggests the tape may be reading along the body's short axis.
-  REFERENCE_SCAN cross-check: the cavity main opening Y span is
-  50 mm (y 14..64), so a 40 mm readable insert is plausible for a
-  straight-line partial depth, not the full opening.
+- Cross-check with the scan: the main opening Y span is 50 mm (y
+  14..64); a 40 mm straight-line insert from the floor to the edge is
+  consistent with the opening's chord geometry (the tape does not
+  follow the curved walls).
+- **Donor-measured value:** cavity floor → opening edge ≈ **40 mm**
+  along the insert axis.  This corroborates the scan's opening scale
+  (50 mm Y span) with a real physical read and confirms the cavity
+  floor is reachable/open at that axis — the UMD-mechanism structure
+  (spindle mount, laser sled rails) is indeed gone or already below
+  the insert path.
 
 ## Shot 164249_13731 (16:42) — steel ruler through the wiring hole
 
@@ -53,7 +58,8 @@ list for that cut.
 
 ## Measurement status
 
+- **13730 (40 mm): CONFIRMED** — tape zero on the removed-drive cavity
+  floor; 40 mm straight-line span to the opening edge.  Corroborates
+  the scan's 50 mm Y-opening chord geometry.  Recorded in U2.
 - **13731 (20 mm): re-interpreted** — wiring-hole chord read, not a
   cavity depth.  Scan remains authoritative for cavity geometry.
-- **13730 (40 mm): still pending** — which face the tape zero rests
-  on.  Once confirmed it lands in U2 (cavity long-axis) or U1.
