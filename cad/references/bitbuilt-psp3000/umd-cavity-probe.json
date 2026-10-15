@@ -1,33 +1,53 @@
 {
   "class": "REFERENCE_SCAN",
-  "source": "BitBuilt PSP 3000 rear.stl, body coords (1mm grid zmax)",
-  "cavity_opening_visible": {
+  "source": "BitBuilt PSP 3000 rear.stl, body coords, 1mm zmax",
+  "main_opening": {
     "x_mm": [
-      118,
+      121,
       168
     ],
     "y_mm": [
-      12,
-      66
+      14,
+      64
     ],
-    "width_mm": 50,
-    "height_mm": 54,
-    "area_mm2": 1675,
-    "equivalent_circle_diameter_mm": 46.2,
+    "width_mm": 47,
+    "height_mm": 50,
+    "area_mm2": 1591,
+    "eq_circle_mm": 45.0,
     "centroid_mm": [
-      141.7,
-      36.2
+      142.1,
+      36.4
+    ],
+    "visible_floor_z": {
+      "p10": 1.27,
+      "median": 1.55,
+      "p90": 3.08
+    },
+    "rim_z_median": 8.73
+  },
+  "door_trough_extension": {
+    "x_mm": [
+      117,
+      155
+    ],
+    "y_mm": [
+      58,
+      70
+    ],
+    "area_mm2": 253,
+    "note": "deep channel continues past y=58 (door side) to y=70; the UMD lid scan shows the door itself is a ~1.4-2mm thin shell, so the trough depth is set by the rear-shell walls, not the lid"
+  },
+  "total_deep_region": {
+    "area_mm2": 1798,
+    "eq_circle_mm": 47.8,
+    "x_mm": [
+      117,
+      168
+    ],
+    "y_mm": [
+      2,
+      70
     ]
   },
-  "floor_z_visible": {
-    "p10": 1.27,
-    "median": 1.55,
-    "p90": 3.08
-  },
-  "rim_z": {
-    "median": 8.73,
-    "note": "cavity wall top band, z 7.7-9.9 mm"
-  },
-  "interpretation": "The deep-visible opening is the region where the disc-well floor is seen from the battery side. The full cavity is larger in X than the visible band (the drive well extends under the door trough on the door side); the owner-directed cut study must add the door-trough region from the front/UMD lid scans before declaring the usable volume.",
-  "body_thickness_datum": "rear outer face = z 0"
+  "opb_implication": "Main opening 47x50mm + trough extension. OPi Zero 2W is 65mm long: it cannot fit flat in the cavity in any single plane (already excluded in mechanical-layout.md OP-A). The split-z OP-B placement must span cavity floor (z~1.5 datum + board 1.2mm) and a second level over the trough; the 5mm component envelope vs rim z~8.7 leaves ~2-3mm headroom per level. The cut study (UMD-mechanism-only structures) extends X past 168 under the door trough on the door side."
 }
