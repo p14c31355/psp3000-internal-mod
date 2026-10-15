@@ -23,15 +23,19 @@ precision, and why it matters. Blocked work is listed per entry.
 - Precision: 0.5 mm envelope; bosses to 0.2 mm.
 - Why: candidate SBC home; UMD-door clearance drives max height there.
 - How: calipers + hinge swing photos; 3D scan preferred if available.
-- PHOTO UPDATE (2026-10-15, drop 3, CONFIRMED): steel ruler zero on
-  the UMD lid's inner face reads ≈ 20 mm to the bottom structure —
-  donor-measured door-side depth span.  Combined with the scan (main
-  opening 47×50, rim z 8.7, floor z 1.3-3.1) the cavity is deeper on
-  the door side than the battery-side rim implies.  The ruler's 20 mm
-  landing face (disc-well floor vs drive-mount bracket) is the next
-  read — if bracket, it is UMD-mechanism-only and cuttable.
-- Blocked: SBC selection freeze, door-latch verification.
-- Status: PARTIALLY MEASURED (door-side span 20 mm donor-measured).
+- PHOTO UPDATE (2026-10-15, drop 3): the 20 mm ruler read went through
+  the UMD drive wiring hole on the joystick-side face — it is a chord
+  read, NOT a door-side cavity depth.  **The scan values remain
+  authoritative for cavity geometry** (main opening 47×50, rim z 8.7,
+  floor z 1.3-3.1, trough channel y 58-70).
+- CUT AUTHORIZATION (user, 2026-10-15): cutting plastic to enlarge
+  the space is acceptable — so the usable volume is defined by the
+  cut study (remove UMD-only bracket/ribs/trough interior; preserve
+  bosses, hinge/latch, perimeter, battery structure), not by the
+  as-scanned cavity.
+- Blocked: cut-study execution (FreeCAD) is now the path; ruler face
+  for the 40 mm tape read still pending.
+- Status: SCAN-AUTHORITATIVE + cut study authorized.
 
 ## U3: Screw boss positions (motherboard region)
 - What: XY of standoffs that accept OEM screws on the rear shell floor,
