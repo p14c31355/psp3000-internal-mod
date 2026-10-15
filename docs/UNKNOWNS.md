@@ -122,4 +122,94 @@ precision, and why it matters. Blocked work is listed per entry.
   R8's REGN pull-up on the power board.  One schematic edit plus
   re-route; scheduled for the next power-board schematic revision.
 - Blocked: nothing (design change, no measurement needed).
-- Status: OPEN (action scheduled).
+- Status: RESOLVED-IN-DESIGN (v1 board retired; v2 supervisor STAT
+  line is pulled to its own 3.3 V domain — see system-architecture §5).
+
+## U12: Front-shell display aperture depth (NEW, v2)
+
+- What: z-space available behind the display window (front glass inner
+  face → first obstruction) across the active area; plus bezel-lip
+  width around the window.
+- Precision: 0.1 mm.
+- Why: replacement panel modules are 3.0–4.5 mm thick (stock glass was
+  2.2 mm); the module + bridge-PCB stack must fit.  This single number
+  decides the panel candidate (display-candidates.md #1 vs #3) and
+  whether the bridge sits directly behind the module.
+- How: donor shell, depth gauge through the window at ≥5 points.
+- Blocked: panel order, bridge board outline, display stack freeze.
+- Status: OPEN — **top v2 mechanical blocker**.
+
+## U13: Bezel lip width and window border (NEW, v2)
+
+- What: window border band width (shell side) around the active-area
+  window; whether a cover-glass-extension panel can hide glass-vs-
+  window mismatch (101.5–105.5 mm candidate glass vs 103.6 mm stock).
+- Precision: 0.2 mm.
+- Why: candidate outlines differ by up to 4 mm; the visible result
+  must stay stock-looking.
+- How: donor shell, calipers on the window edge.
+- Blocked: panel candidate final selection.
+- Status: OPEN.
+
+## U14: Button FPC pinout, matrix map, stick reference rail (NEW, v2)
+
+- What: FPC pin count/pitch; row/col matrix membership of every
+  button; pull-up/down locations; analog stick pot ends/wiper and its
+  reference rail's source (PSP MB rail vs battery).
+- Precision: electrical map exact (continuity); resistances to 1%.
+- Why: the v2 input interposer's sense taps and MCU-side scan-drive
+  FETs depend on it; wrong assumptions here break both ARK pass-
+  through and OPi-only input.
+- How: donor unit + multimeter continuity map; scope the scan while
+  pressing buttons (the stock MB scans continuously).
+- Blocked: input interposer schematic (input-architecture.md §5).
+- Status: OPEN.
+
+## U15: Orange Pi Zero 2W as-measured geometry (NEW, v2)
+
+- What: hole positions (hole Ø 3.0 mm is VERIFIED, positions are not),
+  max component height over the board, bottom-side protrusion, exact
+  24pin FPC exit position.
+- Precision: 0.1 mm.
+- Why: mechanical-layout.md OP-B placement and any OPi standoffs.
+  Current 3.5 mm-inset hole positions are ESTIMATED from the
+  Raspberry Pi Zero mechanical family — not verified for the OPi.
+- How: calipers on the donor OPi board when purchased.
+- Blocked: OPi mounting features on v2 boards, co-stack simulation.
+- Status: OPEN.
+
+## U16: Stock PSP motherboard current profile (NEW, v2)
+
+- What: PSP-3000 MB supply current in menu/gameplay/sleep (stock
+  battery terminal), to replace the ESTIMATED 1.2 A ceiling in
+  power-budget.md.
+- How: donor console, USB power meter inline on a bench supply at the
+  battery terminal voltage.
+- Why: ARK-mode endurance arithmetic and the v2 SYS rail sizing.
+- Blocked: final power-budget freeze (architecture-level numbers are
+  already conservative).
+- Status: OPEN.
+
+## U17: Battery pack ID/thermistor behavior (NEW, v2)
+
+- What: stock pack terminal count and behavior (ID resistor? NTC?
+  open?), pack connector family (do not assume JST-PH).
+- Why: the v2 pack path feeds the stock MB in ARK mode; the MB may
+  refuse to boot or mis-charge with wrong ID lines.  Safety-relevant.
+- How: donor pack + multimeter; donor shell connector inspection.
+- Blocked: v2 battery-path schematic detail (power section).
+- Status: OPEN.
+
+## U18: OPi Zero 2W 24pin FFC pin-level pinout (NEW, v2)
+
+- What: pin-by-pin function of the 24pin expansion FFC (the manual
+  lists capabilities: USB2.0 ×2, 100M eth, analog audio, TV-OUT,
+  power button, 2× LRADC — the per-pin map exists only as images in
+  `cad/references/orangepi-zero2w/opi24pin*.png`, which the tooling
+  could not read reliably).
+- Why: the v2 harness from OPi to power/supervisor boards uses this
+  FFC; wrong pin map = dead board.
+- How: (a) read the wiki images with reliable tooling; (b) confirm
+  against the donor board with a multimeter once U15 happens.
+- Blocked: harness connector selection + OPi-side schematic.
+- Status: OPEN.
