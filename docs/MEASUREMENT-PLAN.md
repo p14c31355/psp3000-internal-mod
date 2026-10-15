@@ -32,19 +32,27 @@ face, X right, Y up, Z toward the viewer. Tolerance notes mandatory.
 | m2.4 | Speaker impedance (U8) | ohmmeter (DCR; nominal 8 ohm expected) |
 | m2.5 | LCD FPC continuity sanity vs. spec pin map | multimeter panel connector -> FPC tail |
 
-## Campaign 3 — SVDI capture (unlocks Phase 4, highest value)
+## Campaign 3 — SVDI capture (DEPRIORITIZED in v2)
 
-Goal: recover the exact symbol packing on DATA1/DATA2 between start/end
-codes while a donor console renders a KNOWN test pattern (solid colors,
-vertical bars).
+The v2 architecture replaces the stock panel with a generic RGB panel
+(system-architecture §2), so the SVDI symbol-packing reverse-engineering
+(U6) is no longer on the critical path.  It is retained only as the
+fallback if the ARK USB-streaming path fails bring-up.  Existing SVDI
+breakout hardware remains usable for that contingency.
 
-- Equipment: logic analyzer >= 200 MSa/s with 2 GB memory (Saleae Logic Pro
-  class) or FPGA capture board; LCD FPC breakout (0.5 mm 31-pin FPC to
-  header adapter, custom or bought).
-- Method: capture CLK±, DATA1±, DATA2± for >= 1 frame; decode DDR symbols;
-  correlate frames against the displayed pattern; publish the mapping table
-  and raw captures in docs/references/svdi-capture/.
-- Alternative: obtain LR388G1 (Samantha) functional specification.
+## Campaign 4 — v2 donor measurements (unlocks v2 PCB outlines)
+
+| ID | Measurement | Where | Unlocks |
+|---|---|---|---|
+| m4.1 | Display aperture depth + bezel lip (U12/U13) | donor front shell, depth gauge through the window, ≥5 points | panel order + bridge outline |
+| m4.2 | Button FPC pinout + matrix map + stick rail (U14) | donor, multimeter + scope on the live scan | input interposer schematic |
+| m4.3 | UMD cavity walls/depth + trough relief (U1/U2 v2 extent) | donor, drive removed | OPi OP-B placement freeze |
+| m4.4 | OPi Zero 2W hole positions + component heights (U15) | donor OPi board, calipers | OPi mounting features |
+| m4.5 | OPi 24pin FFC pin map (U18) | wiki images; confirm on donor | harness connector |
+| m4.6 | Stock MB current profile (U16) | donor console + bench supply | power-budget freeze |
+| m4.7 | Pack ID/thermistor + connector family (U17) | donor pack + shell | battery-path schematic |
+
+Priority order: m4.1 → m4.3 → m4.2 → m4.4/m4.5 → m4.6/m4.7.
 
 ## Standing rule
 
