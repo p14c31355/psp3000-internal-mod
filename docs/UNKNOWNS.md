@@ -194,11 +194,16 @@ precision, and why it matters. Blocked work is listed per entry.
 
 - What: stock pack terminal count and behavior (ID resistor? NTC?
   open?), pack connector family (do not assume JST-PH).
+- PHOTO UPDATE (2026-10-15, docs/photo-analysis-donor-shell.md): the
+  pack connects through a small PCB with a gold-plated contact row at
+  the bay's upper edge — a contact-plate interface, not a wire
+  harness.  The v2 pack path must reproduce the contact-plate
+  geometry; exact contact count/pitch still needs the close-up.
 - Why: the v2 pack path feeds the stock MB in ARK mode; the MB may
   refuse to boot or mis-charge with wrong ID lines.  Safety-relevant.
-- How: donor pack + multimeter; donor shell connector inspection.
+- How: donor pack + multimeter; contact-row close-up photo.
 - Blocked: v2 battery-path schematic detail (power section).
-- Status: OPEN.
+- Status: OPEN (interface family narrowed: contact plate).
 
 ## U18: OPi Zero 2W 24pin FFC pin-level pinout (NEW, v2)
 
