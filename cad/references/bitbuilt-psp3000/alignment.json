@@ -1,0 +1,44 @@
+{
+  "coordinate_system": {
+    "origin": "bottom-left of front face",
+    "x": "right",
+    "y": "up",
+    "z": "toward viewer",
+    "datum": "rear outer face (battery side) = z 0"
+  },
+  "specs_mm": {
+    "L": 169.4,
+    "W": 71.4,
+    "T": 18.6
+  },
+  "scan_scale_check": {
+    "front_span": [
+      168.15724182128906,
+      70.93751525878906,
+      13.20236873626709
+    ],
+    "rear_span": [
+      168.23768615722656,
+      70.56049346923828,
+      17.353025436401367
+    ],
+    "note": "X/Y spans ~1% under spec; scan kept at native scale"
+  },
+  "transforms": {
+    "front": {
+      "dx": 0.0,
+      "dy": 0.0,
+      "dz": 5.398
+    },
+    "rear": {
+      "dx": 0.0,
+      "dy": 0.0,
+      "dz": 0.0
+    }
+  },
+  "rig_offset": {
+    "dx": 1.104,
+    "dy": 2.71
+  },
+  "seam_assumption": "Front outer face anchored at z=18.6 (spec). Front scan z-span 13.20 mm; overlap with rear spans the mid-plane seam. Physical seam measurement can replace the assumption without changing any other constant."
+}
