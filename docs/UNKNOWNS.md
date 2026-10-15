@@ -33,9 +33,9 @@ precision, and why it matters. Blocked work is listed per entry.
   cut study (remove UMD-only bracket/ribs/trough interior; preserve
   bosses, hinge/latch, perimeter, battery structure), not by the
   as-scanned cavity.
-- Blocked: cut-study execution (FreeCAD) is now the path; ruler face
-  for the 40 mm tape read still pending.
-- Status: SCAN-AUTHORITATIVE + cut study authorized.
+- Blocked: cut-study execution (FreeCAD) is now the path.
+- Status: SCAN-AUTHORITATIVE + donor corroboration (40 mm floor→edge
+  span, tape zero on the cavity floor) + cut study authorized.
 
 ## U3: Screw boss positions (motherboard region)
 - What: XY of standoffs that accept OEM screws on the rear shell floor,
